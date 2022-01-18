@@ -1,0 +1,72 @@
+#!MC 1410
+$!EXTRACTFROMPOLYLINE
+EXTRACTLINEPOINTSONLY = NO
+EXTRACTTHROUGHVOLUME = YES
+EXTRACTTOFILE = YES
+FNAME = 'd:\ZJOB\Projects\SA WF\RAE 2822\M=0.73\Lazurit\Spline\Yp_Mesh_y_50_b_peri_json_SA_lazurit.3.3.23-config_adaptation+12.WIN.AVX_v1\tecplot\T-5047\vel_0_179.dat'
+NUMPTS = 1000
+RAWDATA
+2
+0.179  0.049432 0.0
+0.177124 0.065718 0.0
+$!EXTRACTFROMPOLYLINE
+EXTRACTLINEPOINTSONLY = NO
+EXTRACTTHROUGHVOLUME = YES
+EXTRACTTOFILE = YES
+FNAME = 'd:\ZJOB\Projects\SA WF\RAE 2822\M=0.73\Lazurit\Spline\Yp_Mesh_y_50_b_peri_json_SA_lazurit.3.3.23-config_adaptation+12.WIN.AVX_v1\tecplot\T-5047\vel_0_319.dat'
+NUMPTS = 1000
+RAWDATA
+2
+0.319  0.060095 0.0
+0.318263 0.076472 0.0
+$!EXTRACTFROMPOLYLINE
+EXTRACTLINEPOINTSONLY = NO
+EXTRACTTHROUGHVOLUME = YES
+EXTRACTTOFILE = YES
+FNAME = 'd:\ZJOB\Projects\SA WF\RAE 2822\M=0.73\Lazurit\Spline\Yp_Mesh_y_50_b_peri_json_SA_lazurit.3.3.23-config_adaptation+12.WIN.AVX_v1\tecplot\T-5047\vel_0_404.dat'
+NUMPTS = 1000
+RAWDATA
+2
+0.404  0.062574 0.0
+0.403851 0.078967 0.0
+$!EXTRACTFROMPOLYLINE
+EXTRACTLINEPOINTSONLY = NO
+EXTRACTTHROUGHVOLUME = YES
+EXTRACTTOFILE = YES
+FNAME = 'd:\ZJOB\Projects\SA WF\RAE 2822\M=0.73\Lazurit\Spline\Yp_Mesh_y_50_b_peri_json_SA_lazurit.3.3.23-config_adaptation+12.WIN.AVX_v1\tecplot\T-5047\vel_0_498.dat'
+NUMPTS = 1000
+RAWDATA
+2
+0.498  0.062071 0.0
+0.498334 0.078461 0.0
+$!EXTRACTFROMPOLYLINE
+EXTRACTLINEPOINTSONLY = NO
+EXTRACTTHROUGHVOLUME = YES
+EXTRACTTOFILE = YES
+FNAME = 'd:\ZJOB\Projects\SA WF\RAE 2822\M=0.73\Lazurit\Spline\Yp_Mesh_y_50_b_peri_json_SA_lazurit.3.3.23-config_adaptation+12.WIN.AVX_v1\tecplot\T-5047\vel_0_574.dat'
+NUMPTS = 1000
+RAWDATA
+2
+0.574  0.058806 0.0
+0.575112 0.075162 0.0
+$!EXTRACTFROMPOLYLINE
+EXTRACTLINEPOINTSONLY = NO
+EXTRACTTHROUGHVOLUME = YES
+EXTRACTTOFILE = YES
+FNAME = 'd:\ZJOB\Projects\SA WF\RAE 2822\M=0.73\Lazurit\Spline\Yp_Mesh_y_50_b_peri_json_SA_lazurit.3.3.23-config_adaptation+12.WIN.AVX_v1\tecplot\T-5047\vel_0_650.dat'
+NUMPTS = 1000
+RAWDATA
+2
+0.65  0.052787 0.0
+0.651589 0.069103 0.0
+$!WriteDataSet  "d:\ZJOB\Projects\SA WF\RAE 2822\M=0.73\Lazurit\Spline\Yp_Mesh_y_50_b_peri_json_SA_lazurit.3.3.23-config_adaptation+12.WIN.AVX_v1\tecplot\T-5047\cp_cf.dat"
+  IncludeText = No
+  IncludeGeom = No
+  IncludeDataShareLinkage = Yes
+  ZoneList =  [13-17]
+  VarPositionList =  [1-4,29-30]
+  Binary = No
+  UsePointFormat = Yes
+  Precision = 9
+  TecplotVersionToWrite = TecplotCurrent
+

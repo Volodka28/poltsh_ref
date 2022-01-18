@@ -1,0 +1,20 @@
+data:
+  param: 120.0
+  param2: false
+tasks:
+  extended_tasks:
+    mi38-0:
+      speed: 0
+      timeout: 100
+    mi38-100:
+      speed: 100
+      timeout: 100
+  mi38-0:
+    speed: 0
+    timeout: 1
+  mi38-100:
+    speed: 100
+    timeout: 100
+  mi38-200:
+    speed: 200
+    timeout: 1

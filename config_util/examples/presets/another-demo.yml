@@ -1,0 +1,16 @@
+extends: "examples/presets/param2-false"
+tasks:
+  # так как у 'param2-false' нет 'tasks', 'task' будет найден среди его родителей
+  extends: "examples/presets/param2-false:tasks"
+  extended_tasks:
+    # синтетический пример:
+    extends: "examples/presets/param2-false:tasks" # вложит всю структуру `tasks` из родителя в `extended_tasks`
+  mi38-0:
+    # это перезапишет только 'timeout' из этой задачи
+    extends: "examples/presets/param2-false:tasks:mi38-0"
+    timeout: 1
+  mi38-200:
+    # этот пример показывает как использовать готовый шаблон.
+    # 'mi38-200' будет унаследован от 'mi38-0' c изменением параметра 'speed'
+    extends: "examples/presets/another-demo:tasks:mi38-0"
+    speed: 200

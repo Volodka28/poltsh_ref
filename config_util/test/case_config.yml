@@ -1,0 +1,15 @@
+case_name: RAE-2822
+description: Крыловой профиль режим 0,73 Маха
+tag_case: 
+  - subsonic
+  - profile
+soft: Lazurit
+proc_per_task: 160
+task_to_calculation: ALL
+tasks:
+  3D_y_1:
+    extends: "test/case_config:task"
+  3D_y_2:
+    extends: "test/case_config:task"
+  3D_y_5:
+    extends: "test/case_config:task"

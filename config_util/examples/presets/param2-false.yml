@@ -1,0 +1,7 @@
+# файл наследуется от 'base' - главный файл и считается всегда доступным
+extends: "examples/presets/base"
+
+data:
+  extends: "examples/presets/base:data" # наследование значения 'data' из 'base' чтобы сохранить остальные значения
+  param2: false
+# все остальные данные будут взяты из `base`

@@ -1,0 +1,3 @@
+task:
+  init: data
+  dont: dont

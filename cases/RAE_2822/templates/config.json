@@ -1,0 +1,326 @@
+{
+  "Boundary Conditions": {
+    "Adiabatic_wall": {
+      "subtype": "Adiabatic_LEE",
+      "type": "Wall"
+    },
+    "Wall": {
+      "subtype": "Adiabatic_LEE",
+      "type": "Wall"
+    },
+    "IInterface": {
+      "subtype": "Copy",
+      "type": "IInterface"
+    },
+    "IInterface+Copy": {
+      "subtype": "Copy",
+      "type": "IInterface"
+    },
+    "IInterfaceWall": {
+      "subtype": "Pass",
+      "type": "Wall"
+    },
+    "Inlet": {
+      "Epsilon, m^2 / s^3": 3741.807038,
+      "K, m^2 / s^2": 9.956547,
+      "Outflow Static Pressure, Pa": 70639.61,
+      "Outflow/Inflow-switch Velocity, m/s": 1,
+      "Passive Impurity Concentration": 1,
+      "Static Pressure, Pa": 70639.61,
+      "Static Temperature, K": 310,
+      "Velocity Vector, m/s": [
+        257.33,
+        12.587,
+        0.0E+0
+      ],
+      "Vt/Vl": 100,
+      "subtype": "FixP",
+      "type": "InOut"
+    },
+    "Interface": {
+      "subtype": "Copy",
+      "type": "Interface"
+    },
+    "Interface+Copy": {
+      "subtype": "Copy",
+      "type": "Interface"
+    },
+    "Outlet": {
+      "Forced Outflow": 0,
+      "Inflow Static Temperature, K": 310,
+      "Minimal Outflow Velocity, m/s": 1,
+      "Static Pressure, Pa": 70639.61,
+      "subtype": "Fixed_Pressure",
+      "type": "Outlet"
+    },
+    "PERI": {
+      "subtype": "Copy",
+      "type": "PERI"
+    },
+    "Pass+Pass": {
+      "subtype": "Pass",
+      "type": "Pass"
+    },
+    "Symmetry": {
+      "subtype": "1order",
+      "type": "Symmetry"
+    }
+  },
+  "Constants": {
+    "DES/IDDES constants": {
+      "C_ILES constant for DES": 0.65000000000000002E+0,
+      "IDDES constants": {
+        "C_delta": 0.1E+1,
+        "C_dt": 0.8E+1,
+        "F_dmin": 0.1E-1
+      }
+    },
+    "KAEP constants": {
+      "CUT": 0.1E-7,
+      "Constant for Durbin correction": 0.29999999999999999E+0
+    },
+    "Law of the wall constant B": 0.50999999999999996E+1,
+    "SA laminar–turbulent transition correction constants": {
+      "Freestream turbulence intensity Tu, %": 0.1E+1,
+      "HI1": 0.2E-2,
+      "HI2": 0.5E+1
+    },
+    "Sutherlads Formula constants": {
+      "Reference Dynamic Viscosity, Pa*s": 1.716E-5,
+      "Reference Temperature, K": 273.11,
+      "Sutherlands Constant, K": 110.56,
+      "Temperature Exponent": 0.15E+1
+    }
+  },
+  "Convergence": {
+    "CFL": {
+      "CFL number": 20,
+      "CFL number speed factor": 0.1
+    },
+    "Gauss-Seidel Iterations number": {
+      "Navier-Stokes equations": 8,
+      "Scalar equation": 4
+    },
+    "Iterations count to solve equation of KAEP model": 5,
+    "Iterations number per time step for unsteady calculation": 20,
+    "Relaxation coefficients": {
+      "Eps in KAEP equations": 0.5,
+      "K in KAEP equations": 0.5,
+      "Navier-Stokes equations": 0.5E+0,
+      "Scalar equation": 0.5E+0,
+      "Spalart-Almaras equation": 0.5E+0
+    }
+  },
+  "Data control": {
+    "Acoustic settings": {
+      "Accumulate acoustic data": false,
+      "Accumulation start time, s": 0.1E+1,
+      "Initiate Kirchhoff surfaces or load from previous": "Initiate"
+    },
+    "Animation settings": {
+      "Record animation start time, s": 0.1E+3,
+      "Record animation time step, s": 0.1E-2,
+      "Use animation": false
+    },
+    "Autosave options": {
+      "Keep tecplot data": "Overwrite",
+      "Number of recovery points": 2,
+      "Recovery point storage frequency, Iterations or timesteps number": 5000
+    },
+    "BC data settings": {
+      "Save BC field tecplot data": false,
+      "Save integrated BC data": false,
+      "Steady calculation settings": {
+        "Record integrated BC data iter step": 10000,
+        "Record integrated BC data start iter": 500000
+      },
+      "Unsteady calculation settings": {
+        "Record integrated BC data start time, s": 0.1E+3,
+        "Record integrated BC data time step, s": 0.1E-2
+      }
+    },
+    "Forces settings": {
+      "Save forces": false,
+      "Steady calculation settings": {
+        "Record forces iter step": 10000,
+        "Record forces start iter": 500000
+      },
+      "Unsteady calculation settings": {
+        "Record forces start time, s": 0.1E+3,
+        "Record forces time step, s": 0.1E-2
+      }
+    },
+    "Postprocessor settings": {
+      "BC cuts configuration": [
+        {
+          "Cut Name": "1st BC cut",
+          "IBLOCK": 1,
+          "Save animation": false
+        },
+        {
+          "Cut Name": "2nd BC cut",
+          "IBLOCK": 1,
+          "Save animation": false
+        }
+      ],
+      "Debug cuts configuration": [
+        {
+          "Cut Name": "1st debug cut",
+          "I1": 1,
+          "IBLOCK": 1,
+          "LKI": 1,
+          "Save animation": false
+        },
+        {
+          "Cut Name": "2nd debug cut",
+          "I1": 1,
+          "IBLOCK": 1,
+          "LKI": 1,
+          "Save animation": false
+        }
+      ],
+      "Number of BC cuts": 2,
+      "Number of XYZ cuts": 2,
+      "Number of debug cuts": 2,
+      "Use postprocessor": false,
+      "XYZ cuts configuration": [
+        {
+          "Blocks Name": "Name_of_Blocks",
+          "Centre X-coordinate, m": 0.0E+0,
+          "Centre Y-coordinate, m": 0.0E+0,
+          "Centre Z-coordinate, m": 0.0E+0,
+          "Cut Name": "X-Cut_1",
+          "Orientation of cut": "X",
+          "Radius of the cut, m": 0.1E+1,
+          "Save animation": false
+        },
+        {
+          "Centre X-coordinate, m": 0.0E+0,
+          "Centre Y-coordinate, m": 0.0E+0,
+          "Centre Z-coordinate, m": 0.0E+0,
+          "Cut Name": "Y-Cut_1",
+          "Orientation of cut": "Y",
+          "Radius of the cut, m": 0.1E+1,
+          "Save animation": false
+        }
+      ]
+    },
+    "Probe settings": {
+      "Number of probes": 1,
+      "Probes coordinates, m": [
+        [
+          0.0E+0,
+          0.0E+0,
+          0.0E+0
+        ],
+        [
+          0.1E+1,
+          0.0E+0,
+          0.0E+0
+        ]
+      ],
+      "Use probes": false
+    },
+    "Tec file format": "Binary"
+  },
+  "Debug settings": {
+    "Use CRC control for MPI data": false
+  },
+  "Fluid properties": {
+    "Constant Cp options": {
+      "Cp, J/kg/K": 1006.43
+    },
+    "Constant properties": true,
+    "Mw, g/mole": 28.966,
+    "Polynomial Cp options based on JANAF tables": {
+      "Coefficients of Cp polynomial profile": [
+        0.0E+0,
+        0.0E+0,
+        0.0E+0,
+        0.0E+0,
+        0.0E+0,
+        0.0E+0,
+        0.0E+0
+      ],
+      "Constant H0 for standard conditions": 0.0E+0,
+      "Tmax, K": 0.3E+4,
+      "Tmin, K": 0.2E+3
+    }
+  },
+  "Initial Conditions": {
+    "Default": {
+      "Attenuation rate, m": 0.0E+0,
+      "Concentration": 0.0E+0,
+      "Pressure, Pa": 70639.61,
+      "Temperature, K": 310,
+      "Velocity, m/s": [
+        257.33,
+        12.587,
+        0.0E+0
+      ],
+      "Vt/Vl": 100,
+      "Epsilon, m^2 / s^3": 3741.807038,
+      "K, m^2 / s^2": 9.956547,
+      "type": "Set Cartesian"
+    }
+  },
+  "Limits": {
+    "Max pressure, Pa": 2E+6,
+    "Max temperature, K": 800,
+    "Max velocity, m/s": 800,
+    "Min pressure, Pa": 1E+4,
+    "Min temperature, K": 150,
+    "Part of previous time step": 0.5,
+    "Passive scalar max value": 1
+  },
+  "Reference value": {
+    "Linear scale, m": 0.61,
+    "Static pressure, Pa": 70639.61,
+    "Temperature, K": 310,
+    "Velocity, m/s": 257.6373
+  },
+  "Scheme settings": {
+    "Scheme constants": {
+      "Modifying coefficient for upwind scheme": 0.1E+1,
+      "Precondition coefficient": 0.1E+1
+    },
+    "Schemes": {
+      "KAEP equations": "TVD2",
+      "Navier-Stokes equations": "WENO",
+      "Scalar equation": "WENO",
+      "Spalart-Almaras equation": "WENO"
+    }
+  },
+  "Turbulence model corrections": {
+    "KAEP model": {
+      "Chien correction": false,
+      "Durbin correction": true
+    },
+    "SA model": {
+      "SA-BC correction for LTP": false,
+      "SA-BCM correction for LTP": false
+    }
+  },
+  "mesh": {
+    "Geom norm coefficient, geometry units": 610,
+    "Ignore negative volume": false,
+    "Import tolerance factors": {
+      "Import interface error": 0.99999999999999995E-6,
+      "Interpolation interface distance threshold, m": 0.0E+0,
+      "Interpolation interface zero error": 0.0E+0,
+      "Periodic BC error": 0.1E-3
+    },
+    "Mesh filename without extension": "RAE_2822_Design_3D_y_2_20D_json"
+  },
+  "task": {
+    "Approach": "RANS",
+    "Max iteration count for steady calculations": 15000,
+    "Solving passive scalar equation": true,
+    "Turbulence model": "SA",
+    "Unsteady calculation configurations": {
+      "Max calculating time, s": 0.0E+0,
+      "Start average time, s": 0.1E+1,
+      "Step time, s": 0.1E-3
+    }
+  }
+}

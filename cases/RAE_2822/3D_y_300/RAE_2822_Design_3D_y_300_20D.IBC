@@ -1,0 +1,95 @@
+! Version 3
+! DO NOT MODIFY THIS FILE.  RESULTS LIKELY TO BE UNDESIRABLE
+42
+433 1 1 2 84 84 1 80 5 
+431 1 1 2 1 70 1 1 2 
+432 1 1 2 70 84 1 1 7 
+436 2 1 2 70 70 1 75 10 
+437 2 1 2 70 70 75 89 7 
+438 2 1 2 1 70 1 1 3 
+431 2 1 2 1 70 89 89 1 
+441 3 1 2 70 70 29 43 11 
+442 3 1 2 70 70 15 29 6 
+443 3 1 2 70 70 1 15 12 
+440 3 1 2 1 70 1 1 4 
+438 3 1 2 1 70 43 43 2 
+440 4 1 2 1 1 1 70 3 
+445 4 1 2 89 89 1 70 5 
+446 4 1 2 1 75 70 70 9 
+447 4 1 2 75 89 70 70 8 
+433 5 1 2 1 1 1 80 1 
+445 5 1 2 15 84 1 1 4 
+450 5 1 2 1 15 1 1 8 
+451 6 1 2 1 1 1 15 11 
+453 6 1 2 15 15 1 15 12 
+442 6 1 2 1 15 1 1 3 
+437 7 1 2 1 1 1 15 2 
+454 7 1 2 15 15 1 15 8 
+455 7 1 2 1 15 1 1 10 
+432 7 1 2 1 15 15 15 1 
+456 8 1 2 1 1 1 15 9 
+450 8 1 2 15 15 1 15 5 
+447 8 1 2 1 15 1 1 4 
+454 8 1 2 1 15 15 15 7 
+446 9 1 2 15 15 1 75 4 
+458 9 1 2 1 15 1 1 12 
+456 9 1 2 1 15 75 75 8 
+436 10 1 2 1 1 1 75 2 
+460 10 1 2 1 15 1 1 11 
+455 10 1 2 1 15 75 75 7 
+451 11 1 2 1 1 1 15 6 
+460 11 1 2 15 15 1 15 10 
+441 11 1 2 1 15 15 15 3 
+443 12 1 2 15 15 1 15 3 
+453 12 1 2 1 15 1 1 6 
+458 12 1 2 1 15 15 15 9 
+36
+219 1 1 1 1 84 1 80 Symmetry Default PERI
+463 1 2 2 1 84 1 80 Symmetry Default PERI
+430 1 1 2 1 1 1 80 Inlet Default Inlet
+434 1 1 2 1 84 80 80 Outlet Default Outlet
+262 2 1 1 1 70 1 89 Symmetry Default PERI
+464 2 2 2 1 70 1 89 Symmetry Default PERI
+435 2 1 2 1 1 1 89 Inlet Default Inlet
+264 3 1 1 1 70 1 43 Symmetry Default PERI
+465 3 2 2 1 70 1 43 Symmetry Default PERI
+439 3 1 2 1 1 1 43 Inlet Default Inlet
+263 4 1 1 1 89 1 70 Symmetry Default PERI
+466 4 2 2 1 89 1 70 Symmetry Default PERI
+444 4 1 2 1 89 1 1 Inlet Default Inlet
+220 5 1 1 1 84 1 80 Symmetry Default PERI
+467 5 2 2 1 84 1 80 Symmetry Default PERI
+449 5 1 2 84 84 1 80 Inlet Default Inlet
+448 5 1 2 1 84 80 80 Outlet Default Outlet
+235 6 1 1 1 15 1 15 Symmetry Default PERI
+468 6 2 2 1 15 1 15 Symmetry Default PERI
+452 6 1 2 1 15 15 15 Wall Default Wall
+217 7 1 1 1 15 1 15 Symmetry Default PERI
+469 7 2 2 1 15 1 15 Symmetry Default PERI
+216 8 1 1 1 15 1 15 Symmetry Default PERI
+470 8 2 2 1 15 1 15 Symmetry Default PERI
+215 9 1 1 1 15 1 75 Symmetry Default PERI
+471 9 2 2 1 15 1 75 Symmetry Default PERI
+457 9 1 2 1 1 1 75 Wall Default Wall
+214 10 1 1 1 15 1 75 Symmetry Default PERI
+472 10 2 2 1 15 1 75 Symmetry Default PERI
+459 10 1 2 15 15 1 75 Wall Default Wall
+213 11 1 1 1 15 1 15 Symmetry Default PERI
+473 11 2 2 1 15 1 15 Symmetry Default PERI
+461 11 1 2 1 15 1 1 Wall Default Wall
+212 12 1 1 1 15 1 15 Symmetry Default PERI
+474 12 2 2 1 15 1 15 Symmetry Default PERI
+462 12 1 2 1 1 1 15 Wall Default Wall
+12
+475 1 1 2 1 84 1 80 Fluid Default NoName
+476 2 1 2 1 70 1 89 Fluid Default NoName
+477 3 1 2 1 70 1 43 Fluid Default NoName
+478 4 1 2 1 89 1 70 Fluid Default NoName
+479 5 1 2 1 84 1 80 Fluid Default NoName
+480 6 1 2 1 15 1 15 Fluid Default NoName
+481 7 1 2 1 15 1 15 Fluid Default NoName
+482 8 1 2 1 15 1 15 Fluid Default NoName
+483 9 1 2 1 15 1 75 Fluid Default NoName
+484 10 1 2 1 15 1 75 Fluid Default NoName
+485 11 1 2 1 15 1 15 Fluid Default NoName
+486 12 1 2 1 15 1 15 Fluid Default NoName
