@@ -1,0 +1,18 @@
+Nu.mcr:
+  files: ALL
+  iters: LAST
+  key:
+    - Boundary Conditions.Inlet.Static Pressure, Pa
+  output_file: 
+    name: Nu.dat
+    convert: true
+    scatters: 
+      - angle
+      - Nu_inf
+      - angle
+      - Y+
+field_U.py: 
+  files: ALL
+  iters: LAST
+  key: []
+verify.py:

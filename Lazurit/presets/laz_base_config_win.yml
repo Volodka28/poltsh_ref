@@ -1,0 +1,5 @@
+base:
+  program: lazurit
+  version: Lazurit.WIN.AVX.exe
+  path_to_lazurit: "D:/Lazurit"
+  proc: 2

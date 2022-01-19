@@ -1,0 +1,30 @@
+Tecplot 2018.1.1.87425 Batch Log
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+Err: Add-on "tecutildataio_loadfea.dll" could not be loaded.
+Не найдена указанная процедура.
+
+(Windows error 127)
+ACTION: NewLayout
+ACTION: ReadDataSet: "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_FLOW_T-1_B-1.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_FLOW_T-1_B-10.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_FLOW_T-1_B-11.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_FLOW_T-1_B-12.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_FLOW_T-1_B-2.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_FLOW_T-1_B-3.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_FLOW_T-1_B-4.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_FLOW_T-1_B-5.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_FLOW_T-1_B-6.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_FLOW_T-1_B-7.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_FLOW_T-1_B-8.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_FLOW_T-1_B-9.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_WALL_T-1_B-10.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_WALL_T-1_B-11.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_WALL_T-1_B-12.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_WALL_T-1_B-7.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_WALL_T-1_B-8.plt" "C:\Users\vvbuley\Desktop\test\done\Lazurit.WIN.AVX\ROG_15_y_0_1\tecplot\T-1\TEC_WALL_T-1_B-9.plt"
+ACTION: CreateSliceZoneFromPlane
+ACTION: SetContourVar: CONTOURGROUP=1, NEWVAR=5, LEVELESINITMODE=ResetToNice
+ACTION: Export
+ACTION: PageControl: CREATE
+ACTION: NewLayout

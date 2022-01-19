@@ -1,0 +1,23 @@
+ROG_15:
+  soft: lazurit
+  description: subsonic, profile
+  tag_case:
+    - profile
+    - subsonic
+  tasks:
+    y_0_1:
+      extends: "ROG_15_task:task"
+    y_1:
+      extends: "ROG_15_task:task"
+    y_5:
+      extends: "ROG_15_task:task"
+    y_10:
+      extends: "ROG_15_task:task"
+    y_30:
+      extends: "ROG_15_task:task"
+    y_60:
+      extends: "ROG_15_task:task"
+    y_150:
+      extends: "ROG_15_task:task"
+    y_300:
+      extends: "ROG_15_task:task"

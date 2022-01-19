@@ -1,0 +1,6 @@
+task:
+  init: data
+  dont: dont
+  proc_per_task: 160
+  # post:
+  #   extends: "ROG_15_post:post"

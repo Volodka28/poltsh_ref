@@ -1,0 +1,43 @@
+post:
+  Nu.mcr:
+    files: ALL
+    iters: LAST
+    key:
+      - Boundary Conditions.Inlet.Static Pressure, Pa
+  convert:
+    - Nu.dat
+  picture:
+    slice1:
+      origin: [0, 0, -0.1]
+      normal: [0, 0, 1]
+      zones: ""
+      equations:
+      - "{X1} = {X}"
+      axis_x: "X"
+      axis_y: "Y"
+      lim_axes:
+        x_min: -1
+        x_max: 1
+        y_min: -1
+        y_max: 1
+      value:
+        P: [10000, 100000, 10000]
+        M:
+      
+    slice2:
+      origin: [0, 0, -0.2]
+      normal: [0, 0, 1]
+      zones: ""
+      equations:
+      - "{X1} = {X}"
+      axis_x: "X"
+      axis_y: "Y"
+      lim_axes:
+        x_min: -2
+        x_max: 2
+        y_min: -1
+        y_max: 1
+      value:
+        P:
+        M: [0, 1, 0.1]
+  # verify.py:

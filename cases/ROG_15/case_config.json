@@ -1,0 +1,12 @@
+{
+    "soft": "Lazurit",
+    "enable": false,
+    "description": "",
+    "tag": ["лёд", "цилиндр"],
+    "case_name": "ROG_15",
+    "post": "...",
+    "validation": true,
+    "functional testing": false,
+    "report": true,
+    "max_proc": 160
+}

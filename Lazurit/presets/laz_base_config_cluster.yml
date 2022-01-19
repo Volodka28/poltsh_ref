@@ -1,0 +1,10 @@
+program: lazurit
+version: Lazurit.WIN.AVX.exe
+path_to_lazurit: D:\Lazurit
+user_name: vvbulei
+project_name: test_pm
+node_count: 10
+node_type: skylake
+cases:
+  RAE_2822:
+    extends: "RAE_2822_case:"

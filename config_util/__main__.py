@@ -10,10 +10,8 @@ from preset_eng import PresetRegister
 
 register = PresetRegister(
     [
-        Path("C:/Users/vvbuley/Desktop/autotest"),
-        Path("C:/Users/vvbuley/Desktop/autotest/lazurit"),
-        Path("C:/Users/vvbuley/Desktop/autotest/cases/RAE_2822"),
-        Path("C:/Users/vvbuley/Desktop/test_autotest")
+        Path(r"D:\project\GIT\poltsh_ref\cases\ROG_15"),
+        Path(r"D:\project\GIT\poltsh_ref\Lazurit\presets")
     ]
 )
 __version__ = (0, 1, 0)
