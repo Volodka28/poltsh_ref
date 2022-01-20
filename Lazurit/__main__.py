@@ -57,7 +57,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     autotest_config["test_path"] = args.test_path
     autotest_config["case_path"] = args.case_path
-
+    CASE_PATH = Path(autotest_config["case_path"])
+    TEST_PATH = Path(autotest_config["test_path"])
     # # выяснение текущей операционной системы для определения сценария
     # cur_os = platform
 
@@ -70,7 +71,7 @@ if __name__ == "__main__":
 
     tasks_to_run = {}
     for case in autotest_config["cases"]:
-        if (Path(autotest_config["case_path"]) / case).exists():
+        if (CASE_PATH / case).exists():
             tasks_to_run[case] = []
             init_case(case_name=case,
                       test_path=Path(autotest_config["test_path"]),
@@ -82,10 +83,5 @@ if __name__ == "__main__":
     for case_name in tasks_to_run:
         for task in tasks_to_run[case_name]:
             event_giver.handle_events(task)
-            print(task.taken_events)
-            print(task.passed_events)
-            event_giver.handle_events(task)
-            print(task.taken_events)
-            print(task.passed_events)
 
     #### ЗАПУСК НА РАСЧЁТ
