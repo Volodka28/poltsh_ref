@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-
+import shutil
 
 
 
@@ -11,17 +11,28 @@ MESH_CREATE, CONFIG_CREATE = "MESH_CREATE", "CONFIG_CREATE"
 
 class Task:
 
-    def __init__(self, case_name, task_name):
+    def __init__(self, case_name: str, task_name: str, test_path: Path, program: str, program_version: str):
         self.case_name = case_name
-        self.name = task_name
+        self.task_name = task_name
+        self.test_path = test_path
+        self.program = program
+        self.program_version = program_version
         self.passed_events = set()
         self.taken_events = set()
-        self.dir_calc = "путь до расчетной директории"
-        self.case_path = "Путь до папки кейса для инициализации"
 
 
     def make_dirs(self):
-        pass
+        path_name = f"{self.case_name}_{self.task_name}"
+        calc_path = self.test_path / "calc" / self.program / self.program_version / path_name
+        done_path = self.test_path / "done" / self.program / self.program_version / path_name
+        post_path = self.test_path / "post" / self.program / self.program_version / path_name
+        if not done_path.exists():
+            if calc_path.exists():
+                shutil.rmtree(calc_path, ignore_errors=True)
+            os.makedirs(calc_path, exist_ok=True)
+        if post_path.exists():
+            shutil.rmtree(post_path, ignore_errors=True)
+
 
 
 class Event:
@@ -97,8 +108,12 @@ if __name__ == "__main__":
         event_giver.add_event(event)
 
 
-    task = Task("hui", "pizda")
-    task.make_dirs(Path(os.getcwd()))
+    task = Task(case_name="case",
+                task_name="task",
+                test_path=Path(r"C:\Users\vvbuley\Desktop\polish_test"),
+                program="Lazurit",
+                program_version="Lazurit_0.1")
+    task.make_dirs()
 
     event_giver.handle_events(task)
     print()
