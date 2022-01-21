@@ -30,11 +30,12 @@ def read_autotest_config(path, name_config="start_conf"):
     return autotest_conf
 
 
-def init_case(case_name, test_path, program, program_version):
+def init_case(case_name, test_path, program, program_version, cases_path):
     for task_name in autotest_config["cases"][case_name]["tasks"]:
         new_task = mkCase.Task(case_name=case_name,
                                task_name=task_name,
                                test_path=test_path,
+                               cases_path=cases_path,
                                program=program,
                                program_version=program_version)
         new_task.make_dirs()
@@ -57,35 +58,32 @@ if __name__ == "__main__":
     args = parser.parse_args()
     autotest_config["test_path"] = args.test_path
     autotest_config["case_path"] = args.case_path
-
+    CASES_PATH = Path(autotest_config["case_path"])
+    TEST_PATH = Path(autotest_config["test_path"])
     # # выяснение текущей операционной системы для определения сценария
     # cur_os = platform
 
     #### ИНИЦИАЛИЗАЦИЯ КЕЙСОВ
 
-    events = [mkCase.Event(mkCase.MESH_CREATE), mkCase.Event(mkCase.CONFIG_CREATE)]
+    events = [mkCase.Event(mkCase.MESH_CREATE), mkCase.Event(mkCase.CONFIG_CREATE), mkCase.Event(mkCase.POST_CREATE)]
     event_giver = mkCase.EventGiver()
     for event in events:
         event_giver.add_event(event)
 
     tasks_to_run = {}
     for case in autotest_config["cases"]:
-        if (Path(autotest_config["case_path"]) / case).exists():
+        if (CASES_PATH / case).exists():
             tasks_to_run[case] = []
             init_case(case_name=case,
                       test_path=Path(autotest_config["test_path"]),
                       program=autotest_config["program"],
-                      program_version=autotest_config["program_version"])
+                      program_version=autotest_config["program_version"],
+                      cases_path=CASES_PATH)
         else:
             raise KeyError(f"Такого кейса нет в базе: {case}")
 
     for case_name in tasks_to_run:
         for task in tasks_to_run[case_name]:
             event_giver.handle_events(task)
-            print(task.taken_events)
-            print(task.passed_events)
-            event_giver.handle_events(task)
-            print(task.taken_events)
-            print(task.passed_events)
 
     #### ЗАПУСК НА РАСЧЁТ
