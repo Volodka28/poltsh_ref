@@ -8,18 +8,19 @@ import yaml
 from json.encoder import JSONEncoder
 from numpyencoder import NumpyEncoder
 
-# import mkCase.gen_config as gen_config
-import gen_config
+import mkCase.gen_config as gen_config
+# import gen_config
 
-MESH_CREATE, CONFIG_CREATE = "MESH_CREATE", "CONFIG_CREATE"
+MESH_CREATE, CONFIG_CREATE, POST_CREATE = "MESH_CREATE", "CONFIG_CREATE", "POST_CREATE"
 
 
 class Task:
 
-    def __init__(self, case_name: str, task_name: str, test_path: Path, program: str, program_version: str):
+    def __init__(self, case_name: str, task_name: str, test_path: Path, cases_path: Path, program: str, program_version: str):
         self.post_path = None
         self.done_path = None
         self.calc_path = None
+        self.cases_path = cases_path
         self.case_name = case_name
         self.task_name = task_name
         self.test_path = test_path
@@ -109,14 +110,14 @@ class ConfigCreate(NullHandler):
                 task.taken_events.add(event.kind)
                 ##################################
                 # Чтение таблицы параметров задач
-                tasks_config_data = pd.read_excel(CASE_PATH / task.case_name / "tasks.xlsx")
+                tasks_config_data = pd.read_excel(task.cases_path / task.case_name / "tasks.xlsx")
                 tasks_config_data.drop('template', axis = 1, inplace=True)
                 if task.task_name not in list(tasks_config_data.task_name):
                     raise ValueError("Задачи с таким названием нет, проверьте конфиг кейса и таблицу")
                 index_task = tasks_config_data[tasks_config_data.task_name == task.task_name].index.values.astype(int)
                 set_for_task = pd.DataFrame(tasks_config_data.iloc[index_task]) # строка датафрейма с настройками для одной задачи
                 # Чтение шаблона конфига
-                with open(CASE_PATH / task.case_name / "templates" / "config.json", "r") as f:
+                with open(task.cases_path / task.case_name / "templates" / "config.json", "r") as f:
                     temp_config = json.load(f)
                 # Замена значение в конфиге значениями из таблицы
                 new_conf = self.update_config(template=temp_config, data=set_for_task)
@@ -134,10 +135,32 @@ class ConfigCreate(NullHandler):
             super().handle(task, event)
 
 
+class PostFileCreator(NullHandler):
+    def handle(self, task, event):
+        if event.kind == POST_CREATE:
+            event_name = "Копирование файлов для обработки задачи"
+            if event.kind not in (task.passed_events | task.taken_events):
+                print(f"Задание получено: \"{event_name}\"")
+                task.taken_events.add(event.kind)
+                ##################################
+                if "post" in os.listdir(task.cases_path / task.case_name):
+                    shutil.copytree(Path(task.cases_path / task.case_name) / "post", task.calc_path / "post")
+                else:
+                    print(f"Задача: {task.case_name}_{task.task_name} не имеет файлов для постобработки")
+                ##################################
+            elif event.kind in task.taken_events:
+                print(f"Задание выполнено: \"{event_name}\"")
+                task.passed_events.add(event.kind)
+                task.taken_events.remove(event.kind)
+        else:
+            print("Передаю обработку дальше")
+            super().handle(task, event)
+
+
 class EventGiver:
 
     def __init__(self):
-        self.handlers = MeshCreate(ConfigCreate())
+        self.handlers = MeshCreate(ConfigCreate(PostFileCreator()))
         self.events = []
 
     def add_event(self, event):
@@ -153,7 +176,7 @@ if __name__ == "__main__":
     TEST_PATH = Path(r"C:\Users\vvbuley\Desktop\polish_test")
 
 
-    events = [Event(MESH_CREATE), Event(CONFIG_CREATE)]
+    events = [Event(MESH_CREATE), Event(CONFIG_CREATE), Event(POST_CREATE)]
 
     event_giver = EventGiver()
 
