@@ -2,14 +2,14 @@ import os
 from pathlib import Path
 import shutil
 import pandas as pd
+from functools import reduce  
+import operator
 
 import json
 import yaml
 from json.encoder import JSONEncoder
 from numpyencoder import NumpyEncoder
 
-import mkCase.gen_config as gen_config
-# import gen_config
 
 MESH_CREATE, CONFIG_CREATE, POST_CREATE = "MESH_CREATE", "CONFIG_CREATE", "POST_CREATE"
 
@@ -47,8 +47,6 @@ class Task:
             os.makedirs(self.calc_path, exist_ok=True)
         else:
             print(f"Задача {self.case_name}_{self.task_name} уже посчитана")
-        if self.post_path.exists():
-            pass
 
 
 class Event:
@@ -76,7 +74,14 @@ class MeshCreate(NullHandler):
                 print(f"Задание получено: \"{event_name}\"")
                 task.taken_events.add(event.kind)
                 ##################################
-                os.makedirs(task.calc_path / "MESH_CREATE", exist_ok=True)
+                tasks_config_data = pd.read_excel(task.cases_path / task.case_name / "tasks.xlsx")
+                template_data = tasks_config_data[["task_name", "template"]]
+                if task.task_name in list(template_data.task_name):
+                    index_task = tasks_config_data[tasks_config_data.task_name == task.task_name].index.values.astype(int)
+                    set_for_task = pd.DataFrame(tasks_config_data.iloc[index_task])  # строка датафрейма с настройками для одной задачи
+                    shutil.copytree(task.cases_path / task.case_name / set_for_task.template.values[0], task.calc_path, dirs_exist_ok=True)
+                else:
+                    raise ValueError("Неверное значение задачи в таблице или конфиге кейса")
                 ##################################
             elif event.kind in task.taken_events:
                 print(f"Задание выполнено: \"{event_name}\"")
@@ -89,7 +94,13 @@ class MeshCreate(NullHandler):
 
 class ConfigCreate(NullHandler):
     @staticmethod
-    def update_config(template, data):
+    def getFromDict(dataDict, mapList):
+        return reduce(operator.getitem, mapList, dataDict)
+
+    def setInDict(self, dataDict, mapList, value):
+        self.getFromDict(dataDict, mapList[:-1])[mapList[-1]] = value
+
+    def update_config(self, template, data):
         data.drop('task_name', axis = 1, inplace=True)
         sequence = data.columns.str.split('.').to_list()
         values = data.iloc[0].values
@@ -99,7 +110,7 @@ class ConfigCreate(NullHandler):
                     val = json.loads(val)
             except TypeError:
                 pass
-            gen_config.setInDict(template, seq, val)
+            self.setInDict(template, seq, val)
         return template
 
     def handle(self, task, event):
@@ -144,7 +155,7 @@ class PostFileCreator(NullHandler):
                 task.taken_events.add(event.kind)
                 ##################################
                 if "post" in os.listdir(task.cases_path / task.case_name):
-                    shutil.copytree(Path(task.cases_path / task.case_name) / "post", task.calc_path / "post")
+                    shutil.copytree(task.cases_path / task.case_name / "post", task.calc_path / "post")
                 else:
                     print(f"Задача: {task.case_name}_{task.task_name} не имеет файлов для постобработки")
                 ##################################
