@@ -38,9 +38,8 @@ def init_case(case_name, test_path, program, program_version, cases_path):
                                cases_path=cases_path,
                                program=program,
                                program_version=program_version)
-        new_task.make_dirs()
-        new_task.make_stat()
-        tasks_to_run[case_name].append(new_task)
+        if new_task.make_dirs():
+            tasks_to_run[case_name].append(new_task)
         print("Создано:", new_task.case_name, new_task.task_name, sep="---")
 
 
@@ -85,5 +84,9 @@ if __name__ == "__main__":
     for case_name in tasks_to_run:
         for task in tasks_to_run[case_name]:
             event_giver.handle_events(task)
+            task.make_stat()
+
+    with open("cases.yml", "w") as f:
+        yaml.dump(tasks_to_run, f)
 
     #### ЗАПУСК НА РАСЧЁТ
