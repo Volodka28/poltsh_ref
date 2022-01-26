@@ -2,7 +2,8 @@ from pathlib import Path
 import os
 from sys import platform
 import argparse
-import mkCase.init as mkCase
+import run_util.__main__ as run_util
+import Lazurit.mkCase.init as mkCase
 
 import yaml
 from yaml.loader import SafeLoader
@@ -54,13 +55,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Описание параметров запуска")
     parser.add_argument("--test_path", type=str, help="путь, где проводится тестирование")
     parser.add_argument("--case_path", type=str, help="Путь до папки с тестовыми кейсами")
+    parser.add_argument("--path_to_autotest", type=str, help="Путь до программы")
     args = parser.parse_args()
     autotest_config["test_path"] = args.test_path
     autotest_config["case_path"] = args.case_path
+    autotest_config["path_to_autotest"] = args.path_to_autotest
     CASES_PATH = Path(autotest_config["case_path"])
     TEST_PATH = Path(autotest_config["test_path"])
-    # # выяснение текущей операционной системы для определения сценария
-    # cur_os = platform
+    PATH_TO_AUTOTEST = Path(autotest_config["path_to_autotest"])
 
     #### ИНИЦИАЛИЗАЦИЯ КЕЙСОВ
 
@@ -86,7 +88,15 @@ if __name__ == "__main__":
             event_giver.handle_events(task)
             task.make_stat()
 
-    with open("cases.yml", "w") as f:
-        yaml.dump(tasks_to_run, f)
-
     #### ЗАПУСК НА РАСЧЁТ
+    for case_name in tasks_to_run:
+        for task in tasks_to_run[case_name]:
+            match platform:
+                case "win32":
+                    template = PATH_TO_AUTOTEST / autotest_config["program"] / "runTask" / "templates" / "run.bat"
+                    run_util.run_task(run_util.WindowsRunTask(), template, task.calc_path, autotest_config)
+                case "linux":
+                    template = PATH_TO_AUTOTEST / autotest_config["program"] / "199.sh"
+                    run_util.run_task(run_util.LinuxRunTask(), template, task.calc_path, autotest_config)
+                case _:
+                    raise ValueError("Данная система не поддерживает запуск приложения")
