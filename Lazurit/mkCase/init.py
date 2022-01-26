@@ -45,8 +45,10 @@ class Task:
             if self.calc_path.exists():
                 shutil.rmtree(self.calc_path, ignore_errors=True)
             os.makedirs(self.calc_path, exist_ok=True)
+            return True
         else:
             print(f"Задача {self.case_name}_{self.task_name} уже посчитана")
+            return False
 
 
 class Event:
