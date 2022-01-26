@@ -2,17 +2,22 @@ import argparse
 import json
 import sys
 from pathlib import Path
+import os
 
 import toml
 import yaml
 
 from preset_eng import PresetRegister
 
+
+autotest_path = Path("D:/project/GIT/poltsh_ref")
+case_path = autotest_path / "cases"
+
+path_list = [autotest_path, case_path, autotest_path / "lazurit"]
+for i in os.listdir(case_path):
+    path_list.append(case_path / i)
 register = PresetRegister(
-    [
-        Path(r"D:\project\GIT\poltsh_ref\cases\ROG_15"),
-        Path(r"D:\project\GIT\poltsh_ref\Lazurit\presets")
-    ]
+    path_list
 )
 __version__ = (0, 1, 0)
 
