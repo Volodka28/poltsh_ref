@@ -1,4 +1,5 @@
 import os
+import shutil
 from pathlib import Path
 import pydantic
 from abc import ABC, abstractmethod
@@ -12,23 +13,23 @@ from yaml.loader import SafeLoader
 
 
 def read_file(path, name_file="start_conf"):
-    autotest_conf_path = None
+    file_path = None
     for file in os.listdir(path):
         if name_file in file:
-            autotest_conf_path = path / file
-    if autotest_conf_path is None:
+            file_path = path / file
+    if file_path is None:
         raise ValueError("Нет файла с таким именем")
-    match autotest_conf_path.suffix:
+    match file_path.suffix:
         case ".json":
-            with open(autotest_conf_path, "r") as file:
-                autotest_conf = json.load(file)
+            with open(file_path, "r") as file:
+                file_path = json.load(file)
         case ".yml":
-            with open(autotest_conf_path, "r") as file:
-                autotest_conf = yaml.load(file, Loader=SafeLoader)
+            with open(file_path, "r") as file:
+                file_path = yaml.load(file, Loader=SafeLoader)
         case ".toml":
-            with open(autotest_conf_path, "r") as file:
-                autotest_conf = toml.load(file)
-    return autotest_conf
+            with open(file_path, "r") as file:
+                file_path = toml.load(file)
+    return file_path
 
 
 class AbstractTaskRun(ABC):
@@ -40,6 +41,7 @@ class AbstractTaskRun(ABC):
         self.fill_template(task_path, autotest_config)
         self.make_passport(task_path, autotest_config)
         self.run_task(task_path)
+        self.check_success_calc(task_path)
 
     def read_template(self, template):
         with open(template, "r") as f:
@@ -56,10 +58,13 @@ class AbstractTaskRun(ABC):
     def make_passport(self, task_path, autotest_config) -> None:
         pass
 
+    def check_success_calc(self, task_path) -> None:
+        pass
+
 
 class WindowsRunTask(AbstractTaskRun):
     def fill_template(self, task_path, autotest_config) -> None:
-        task_setting = read_file(task_path, "stat")
+        task_setting = read_file(task_path, "stat.")
         init_task = autotest_config["cases"][task_setting["case_name"]]["tasks"][task_setting["task_name"]]
         match [init_task['dont'], init_task['init']]:
             case ["dont", "mesh"]:
@@ -78,10 +83,28 @@ class WindowsRunTask(AbstractTaskRun):
             f.write(fill_template)
 
     def run_task(self, task_path) -> None:
+        print(f"Задача {task_path.__str__()} запущена")
         work_path = os.getcwd()
         os.chdir(task_path)
         process = run("start.bat", stdout=PIPE)
         os.chdir(work_path)
+
+    def check_success_calc(self, task_path):
+        stat = read_file(task_path, "stat.")
+        with open(task_path / "log.txt", "r") as f:
+            log = [d.replace("\x00", "").rstrip("\n") for d in f.readlines()]
+        for i in log[::-1]:
+            if i != "":
+                last_str = i
+                break
+        # print(stat)
+        if last_str == " ======= Program Lazurit finish! =======":
+            print(f"Задача {task_path.__str__()} успешно завершена")
+            done_path = Path(stat["test_path"]) / "done" / stat["program"] / stat["program_version"]
+            os.makedirs(done_path, exist_ok=True)
+            shutil.move(task_path, done_path, copy_function=shutil.copytree)
+        else:
+            print(f"Задача {task_path.__str__()} недосчиталась")
 
 
 class LinuxRunTask(AbstractTaskRun):
