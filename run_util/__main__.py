@@ -3,6 +3,7 @@ from pathlib import Path
 import pydantic
 from abc import ABC, abstractmethod
 from sys import platform
+from subprocess import PIPE, Popen, run
 
 import yaml
 import json
@@ -38,7 +39,7 @@ class AbstractTaskRun(ABC):
         self.read_template(template)
         self.fill_template(task_path, autotest_config)
         self.make_passport(task_path, autotest_config)
-        self.run_task()
+        self.run_task(task_path)
 
     def read_template(self, template):
         with open(template, "r") as f:
@@ -49,7 +50,7 @@ class AbstractTaskRun(ABC):
         pass
 
     @abstractmethod
-    def run_task(self) -> None:
+    def run_task(self, task_path) -> None:
         pass
 
     def make_passport(self, task_path, autotest_config) -> None:
@@ -58,11 +59,29 @@ class AbstractTaskRun(ABC):
 
 class WindowsRunTask(AbstractTaskRun):
     def fill_template(self, task_path, autotest_config) -> None:
-        with open(task_path / "start.bat", "w") as f:
-            f.write(self.template)
+        task_setting = read_file(task_path, "stat")
+        init_task = autotest_config["cases"][task_setting["case_name"]]["tasks"][task_setting["task_name"]]
+        match [init_task['dont'], init_task['init']]:
+            case ["dont", "mesh"]:
+                comand = f"{autotest_config['program_version']} --threads {autotest_config['proc']} --dont --import_mesh | tee log.txt"
+            case ["dont", "data"]:
+                comand = f"{autotest_config['program_version']} --threads {autotest_config['proc']} --dont | tee log.txt"
+            case ["cont", "data"]:
+                comand = f"{autotest_config['program_version']} --threads {autotest_config['proc']} --cont -1 | tee log.txt"
+            case _:
+                raise KeyError('недопустимые значения для инициализации задачи')
 
-    def run_task(self) -> None:
-        print("win_run")
+        fill_template = self.template.format(program_path=autotest_config["path_to_lazurit"],
+                                             task_dir=task_path.__str__(),
+                                             comand=comand)
+        with open(task_path / "start.bat", "w") as f:
+            f.write(fill_template)
+
+    def run_task(self, task_path) -> None:
+        work_path = os.getcwd()
+        os.chdir(task_path)
+        process = run("start.bat", stdout=PIPE)
+        os.chdir(work_path)
 
 
 class LinuxRunTask(AbstractTaskRun):
@@ -70,7 +89,7 @@ class LinuxRunTask(AbstractTaskRun):
         with open(task_path / "start.sh", "w") as f:
             f.write(self.template)
 
-    def run_task(self) -> None:
+    def run_task(self, task_path) -> None:
         print("run_linux")
 
     def make_passport(self, task_path, autotest_config) -> None:
