@@ -24,9 +24,6 @@ set PATH=%LIB_PATH%;%CRT_140%;%CRT_120%;%intelWIN%;%MPIRT%;%Compiler%;%Compiler_
 :: --cont -1 :: continue calc 
 :: --threads 8 :: Number of OpenMP threads (equal to number of cores on your comuter)
 ::
-{
-    swsdsada
-}
 
 
 @echo %date% %time% >time_file.txt
