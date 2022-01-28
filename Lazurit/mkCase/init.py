@@ -90,7 +90,7 @@ class MeshCreate(NullHandler):
                 task.passed_events.add(event.kind)
                 task.taken_events.remove(event.kind)
         else:
-            print("Передаю обработку дальше")
+            # print("Передаю обработку дальше")
             super().handle(task, event)
 
 
@@ -144,7 +144,7 @@ class ConfigCreate(NullHandler):
                 task.passed_events.add(event.kind)
                 task.taken_events.remove(event.kind)
         else:
-            print("Передаю обработку дальше")
+            # print("Передаю обработку дальше")
             super().handle(task, event)
 
 
@@ -166,7 +166,7 @@ class PostFileCreator(NullHandler):
                 task.passed_events.add(event.kind)
                 task.taken_events.remove(event.kind)
         else:
-            print("Передаю обработку дальше")
+            # print("Передаю обработку дальше")
             super().handle(task, event)
 
 
