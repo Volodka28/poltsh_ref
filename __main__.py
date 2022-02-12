@@ -2,6 +2,8 @@ from pathlib import Path
 import os
 from sys import platform
 import argparse
+import logging
+
 import run_util.__main__ as run_util
 import Lazurit.mkCase.init as mkCase
 
@@ -49,9 +51,13 @@ def start_task():
 
 
 if __name__ == "__main__":
+    logging.basicConfig(filename="log.txt", level=logging.INFO, filemode="w")
     # считываем конфиг
     test_path = Path(os.getcwd())  # Путь до папки, где проходит тестирование
+    logging.info(f"Тестирование начато в {test_path.__str__()}")
     autotest_config = read_autotest_config(test_path)  # Чтение конфига
+    logging.info(f"Тестируемое ПО --- {autotest_config['program']}")
+    logging.info(f"Версия ПО --- {autotest_config['program_version']}")
     parser = argparse.ArgumentParser(description="Описание параметров запуска")
     parser.add_argument("--test_path", type=str, help="путь, где проводится тестирование")
     parser.add_argument("--case_path", type=str, help="Путь до папки с тестовыми кейсами")
@@ -65,7 +71,6 @@ if __name__ == "__main__":
     PATH_TO_AUTOTEST = Path(autotest_config["path_to_autotest"])
 
     #### ИНИЦИАЛИЗАЦИЯ КЕЙСОВ
-
     events = [mkCase.Event(mkCase.MESH_CREATE), mkCase.Event(mkCase.CONFIG_CREATE), mkCase.Event(mkCase.POST_CREATE)]
     event_giver = mkCase.EventGiver()
     for event in events:
@@ -81,6 +86,7 @@ if __name__ == "__main__":
                       program_version=autotest_config["program_version"],
                       cases_path=CASES_PATH)
         else:
+            logging.error(f"Такого кейса нет в базе: {case}")
             raise KeyError(f"Такого кейса нет в базе: {case}")
 
     for case_name in tasks_to_run:
@@ -100,3 +106,5 @@ if __name__ == "__main__":
                     run_util.run_task(run_util.LinuxRunTask(), template, task.calc_path, autotest_config)
                 case _:
                     raise ValueError("Данная система не поддерживает запуск приложения")
+
+    ### ПОСТОБРАБОТКА

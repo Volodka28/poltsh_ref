@@ -10,8 +10,8 @@ import yaml
 from preset_eng import PresetRegister
 
 
-autotest_path = Path(r"D:\project\GIT\poltsh_ref")
-case_path = autotest_path / "cases"
+autotest_path = Path(os.getenv("autotest_program"))
+case_path = Path(os.getenv("case_path"))
 
 path_list = [autotest_path, case_path, autotest_path / "Lazurit" / "presets"]
 for i in os.listdir(case_path):
