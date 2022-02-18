@@ -101,8 +101,8 @@ if __name__ == "__main__":
                     template = PATH_TO_AUTOTEST / autotest_config["program"] / "runTask" / "templates" / "run.bat"
                     run_util.run_task(run_util.WindowsRunTask(), template, task.calc_path, autotest_config)
                 case "linux":
-                    template = PATH_TO_AUTOTEST / autotest_config["program"] / "runTask" / "templates" / "passport.json"
-                    passport_template = PATH_TO_AUTOTEST / autotest_config["program"] / "runTask" / "templates" / "199.sh"
+                    passport_template = PATH_TO_AUTOTEST / autotest_config["program"] / "runTask" / "templates" / "passport.json"
+                    template = PATH_TO_AUTOTEST / autotest_config["program"] / "runTask" / "templates" / "199.sh"
                     run_util.run_task(run_util.LinuxRunTask(), template, task.calc_path, autotest_config, passport_template)
                 case _:
                     raise ValueError("Данная система не поддерживает запуск приложения")
