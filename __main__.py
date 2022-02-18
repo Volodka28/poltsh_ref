@@ -43,7 +43,6 @@ def init_case(case_name, test_path, program, program_version, cases_path):
                                program_version=program_version)
         if new_task.make_dirs():
             tasks_to_run[case_name].append(new_task)
-        print("Создано:", new_task.case_name, new_task.task_name, sep="---")
 
 
 def start_task():
@@ -102,9 +101,12 @@ if __name__ == "__main__":
                     template = PATH_TO_AUTOTEST / autotest_config["program"] / "runTask" / "templates" / "run.bat"
                     run_util.run_task(run_util.WindowsRunTask(), template, task.calc_path, autotest_config)
                 case "linux":
-                    template = PATH_TO_AUTOTEST / autotest_config["program"] / "199.sh"
-                    run_util.run_task(run_util.LinuxRunTask(), template, task.calc_path, autotest_config)
+                    template = PATH_TO_AUTOTEST / autotest_config["program"] / "runTask" / "templates" / "passport.json"
+                    passport_template = PATH_TO_AUTOTEST / autotest_config["program"] / "runTask" / "templates" / "199.sh"
+                    run_util.run_task(run_util.LinuxRunTask(), template, task.calc_path, autotest_config, passport_template)
                 case _:
                     raise ValueError("Данная система не поддерживает запуск приложения")
 
     ### ПОСТОБРАБОТКА
+
+

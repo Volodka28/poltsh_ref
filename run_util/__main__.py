@@ -1,7 +1,6 @@
 import os
 import shutil
 from pathlib import Path
-import pydantic
 from abc import ABC, abstractmethod
 from sys import platform
 from subprocess import PIPE, Popen, run
@@ -36,10 +35,10 @@ class AbstractTaskRun(ABC):
     def __init__(self):
         self.template = None
 
-    def template_method(self, template, task_path, autotest_config):
+    def template_method(self, template, task_path, autotest_config, passport):
         self.read_template(template)
         self.fill_template(task_path, autotest_config)
-        self.make_passport(task_path, autotest_config)
+        self.make_passport(task_path, autotest_config, passport)
         self.run_task(task_path)
         self.check_success_calc(task_path)
 
@@ -55,7 +54,7 @@ class AbstractTaskRun(ABC):
     def run_task(self, task_path) -> None:
         pass
 
-    def make_passport(self, task_path, autotest_config) -> None:
+    def make_passport(self, task_path, autotest_config, passport) -> None:
         pass
 
     def check_success_calc(self, task_path) -> None:
@@ -115,12 +114,16 @@ class LinuxRunTask(AbstractTaskRun):
     def run_task(self, task_path) -> None:
         print("run_linux")
 
-    def make_passport(self, task_path, autotest_config) -> None:
+    def make_passport(self, task_path, autotest_config, passport) -> None:
+        with open(passport, "r", encoding='utf-8') as f:
+            passport = json.load(f)
+        passport["user"] = os.system("echo @USER")
+        passport["work_name"] = autotest_config["work_name"]
         print("passport_linux")
 
 
-def run_task(abstract_class: AbstractTaskRun, template, task_path, autotest_config):
-    abstract_class.template_method(template, task_path, autotest_config)
+def run_task(abstract_class: AbstractTaskRun, template, task_path, autotest_config, passport_template=None):
+    abstract_class.template_method(template, task_path, autotest_config, passport_template)
 
 
 if __name__ == "__main__":

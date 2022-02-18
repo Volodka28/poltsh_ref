@@ -42,6 +42,7 @@ class Task:
         self.done_path = self.test_path / "done" / self.program / self.program_version / path_name
         self.post_path = self.test_path / "post" / self.program / self.program_version / path_name
         if not self.done_path.exists():
+            print("Создано:", self.case_name, self.task_name, sep="---")
             if self.calc_path.exists():
                 shutil.rmtree(self.calc_path, ignore_errors=True)
             os.makedirs(self.calc_path, exist_ok=True)
