@@ -1,9 +1,9 @@
 base:
-  program: lazurit
+  program: Lazurit
   version: lazurit.3.5.5.icc19.0.3.199.CASCADELAKE.exe
   work_name: priklad2-autotest
   node_count: 1
   node_type: cascadelake
   cases:
-    RAE_2822:
-      extends: "RAE_2822_case:ROG_15"
+    ROG_15:
+      extends: "ROG_15_case:ROG_15"
