@@ -147,6 +147,7 @@ class LinuxRunTask(AbstractTaskRun):
         print(f"Задача {task_path.__str__()} запущена")
         work_path = os.getcwd()
         os.chdir(task_path)
+        os.system('chmod 0770 start.sh')
         os.system("./start.sh")
         os.chdir(work_path)
 
