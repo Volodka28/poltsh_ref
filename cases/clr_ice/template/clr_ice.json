@@ -1,0 +1,224 @@
+{
+    "Boundary Conditions": {
+        "clr_ice_0_back.STL": {
+            "Type": "wall",
+            "nearwall_step": 0.02,
+            "ortogonalize": 0.5,
+            "projection_courant": 0.1,
+            "projection_limiter": 0.5,
+            "surfaces": [
+                "clr_ice_0_back.STL"
+            ]
+        },
+        "clr_ice_0_bottom.STL": {
+            "Type": "wall",
+            "nearwall_step": 0.02,
+            "ortogonalize": 0.5,
+            "projection_courant": 0.1,
+            "projection_limiter": 0.5,
+            "surfaces": [
+                "clr_ice_0_bottom.STL"
+            ]
+        },
+        "clr_ice_0_front.STL": {
+            "Type": "wall",
+            "nearwall_step": 0.02,
+            "ortogonalize": 0.5,
+            "projection_courant": 0.1,
+            "projection_limiter": 0.5,
+            "surfaces": [
+                "clr_ice_0_front.STL"
+            ]
+        },
+        "clr_ice_0_left.STL": {
+            "Type": "inlet",
+            "nearwall_step": -1.0,
+            "ortogonalize": 0.0,
+            "projection_courant": 0.1,
+            "projection_limiter": 0.5,
+            "surfaces": [
+                "clr_ice_0_left.STL"
+            ]
+        },
+        "clr_ice_0_right.STL": {
+            "Type": "inlet",
+            "nearwall_step": -1.0,
+            "ortogonalize": 0.0,
+            "projection_courant": 0.1,
+            "projection_limiter": 0.5,
+            "surfaces": [
+                "clr_ice_0_right.STL"
+            ]
+        },
+        "clr_ice_0_rog15.STL": {
+            "Type": "wall",
+            "nearwall_step": 5e-06,
+            "ortogonalize": 0.5,
+            "projection_courant": 0.1,
+            "projection_limiter": 0.5,
+            "surfaces": [
+                "clr_ice_0_rog16.STL"
+            ]
+        },
+        "clr_ice_0_top.STL": {
+            "Type": "wall",
+            "nearwall_step": 0.02,
+            "ortogonalize": 0.5,
+            "projection_courant": 0.1,
+            "projection_limiter": 0.5,
+            "surfaces": [
+                "clr_ice_0_top.STL"
+            ]
+        }
+    },
+    "Solution Conditions": {
+        "bevel_steps_count": 250,
+        "opt_innstep": 50,
+        "opt_substep": 50,
+        "projection_steps_interval": 1,
+        "sizelimit_innstep": 150,
+        "sync_substep": 5
+    },
+    "Zone Conditions": {
+        "NoName": {
+            "dir_diffuse": 0.002,
+            "dir_power": 2.0,
+            "gap_bevel_base": 0.9999,
+            "gap_diffuse": 0.01,
+            "gap_force_base": 0.99,
+            "gap_max": 3.0,
+            "gap_order": 0.0,
+            "gap_trans_pow": 0.33,
+            "max_cell_size": 0.5,
+            "min_cell_size": 1e-06,
+            "shift_size_relaxer": 0.5,
+            "shift_size_stepfix": 1.0,
+            "shrink_ratio": 62.83,
+            "size_diffuse": 0.01,
+            "size_limits_increment": 0.01,
+            "size_trans_pow": 0.25
+        }
+    },
+    "tasks": {
+        "Task List": [
+            {
+                "Arguments": {
+                    "path": ".",
+                    "port": 33057,
+                    "version": null
+                },
+                "Command": "run_local_solver",
+                "Type": "gs1_command"
+            },
+            {
+                "Arguments": {
+                    "thr_per_rank": 4
+                },
+                "Command": "parallel_settings",
+                "Type": "gs1_command"
+            },
+            {
+                "Arguments": {
+                    "files": [
+                        "clr_ice_0_rog15.fra"
+                    ],
+                    "solver": "mesher",
+                    "type": null
+                },
+                "Command": "import_mesh",
+                "Type": "gs1_command"
+            },
+            {
+                "Arguments": {},
+                "Command": "distribute_parameters",
+                "Type": "action"
+            },
+            {
+                "Arguments": {},
+                "Command": "init_static",
+                "Type": "gs1_command"
+            },
+            {
+                "Arguments": {
+                    "export_fictive": false,
+                    "files": [
+                        "plt"
+                    ],
+                    "type": "plt",
+                    "write_dynamic": false,
+                    "write_static": true
+                },
+                "Command": "export",
+                "Type": "gs1_command"
+            },
+            {
+                "Arguments": {},
+                "Command": "init_dynamic",
+                "Type": "gs1_command"
+            },
+            {
+                "Arguments": {
+                    "export_fictive": false,
+                    "export_path": [
+                        "plt"
+                    ],
+                    "export_save_interval": 1,
+                    "export_type": "plt",
+                    "gs1_path": ".",
+                    "iterations_count": 50
+                },
+                "Command": "calc_iterate",
+                "Type": "gs1_command"
+            },
+            {
+                "Arguments": {
+                    "parametr_name": "sync_substep",
+                    "parametr_value": 100
+                },
+                "Command": "set_data_param",
+                "Type": "gs1_command"
+            },
+            {
+                "Arguments": {
+                    "parametr_name": "projection_steps_interval",
+                    "parametr_value": 1
+                },
+                "Command": "set_data_param",
+                "Type": "gs1_command"
+            },
+            {
+                "Arguments": {},
+                "Command": "calc_iteration",
+                "Type": "gs1_command"
+            },
+            {
+                "Arguments": {
+                    "export_fictive": false,
+                    "files": [
+                        "plt"
+                    ],
+                    "type": "plt",
+                    "write_dynamic": true,
+                    "write_static": false
+                },
+                "Command": "export",
+                "Type": "gs1_command"
+            },
+            {
+                "Arguments": {
+                    "files": [
+                        "clr_ice_0_rog15_out.cgns"
+                    ],
+                    "type": "cgns_mesh"
+                },
+                "Command": "export",
+                "Type": "gs1_command"
+            },
+            {
+                "Arguments": {},
+                "Command": "stop",
+                "Type": "gs1_command"
+            }
+        ]
+    }
+}

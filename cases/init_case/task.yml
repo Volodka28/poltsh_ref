@@ -1,0 +1,6 @@
+task:
+  dont: dont
+  init: mesh
+  post:
+    extends: CASE_NAME_post:post
+  proc: 60

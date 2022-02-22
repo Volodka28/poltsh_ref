@@ -1,0 +1,14 @@
+clr_ice:
+  soft: Zircon
+  tag_case:
+  - 1_key_words_for_case
+  - 2_key_words_for_case
+  tasks:
+    task1:
+      extends: clr_ice_task:task
+    task2:
+      extends: clr_ice_task:task
+    task3:
+      extends: clr_ice_task:task
+    task4:
+      extends: clr_ice_task:task

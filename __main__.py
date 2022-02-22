@@ -5,7 +5,8 @@ import argparse
 import logging
 
 import run_util.__main__ as run_util
-import Lazurit.mkCase.init as mkCase
+import Lazurit.mkCase.init as LazmkCase
+import zircon.mkCase.init as ZinmkCase
 
 import yaml
 from yaml.loader import SafeLoader
@@ -35,12 +36,21 @@ def read_autotest_config(path, name_config="start_conf"):
 
 def init_case(case_name, test_path, program, program_version, cases_path):
     for task_name in autotest_config["cases"][case_name]["tasks"]:
-        new_task = mkCase.Task(case_name=case_name,
-                               task_name=task_name,
-                               test_path=test_path,
-                               cases_path=cases_path,
-                               program=program,
-                               program_version=program_version)
+        match program:
+            case "Lazurit":
+                new_task = LazmkCase.Task(case_name=case_name,
+                                          task_name=task_name,
+                                          test_path=test_path,
+                                          cases_path=cases_path,
+                                          program=program,
+                                          program_version=program_version)
+            case "Zircon":
+                new_task = ZinmkCase.Task(case_name=case_name,
+                                          task_name=task_name,
+                                          test_path=test_path,
+                                          cases_path=cases_path,
+                                          program=program,
+                                          program_version=program_version)
         if new_task.make_dirs():
             tasks_to_run[case_name].append(new_task)
 
@@ -70,8 +80,14 @@ if __name__ == "__main__":
     PATH_TO_AUTOTEST = Path(autotest_config["path_to_autotest"])
 
     #### ИНИЦИАЛИЗАЦИЯ КЕЙСОВ
-    events = [mkCase.Event(mkCase.MESH_CREATE), mkCase.Event(mkCase.CONFIG_CREATE), mkCase.Event(mkCase.POST_CREATE)]
-    event_giver = mkCase.EventGiver()
+    match autotest_config["program"]:
+        case "Lazurit":
+            events = [LazmkCase.Event(LazmkCase.MESH_CREATE), LazmkCase.Event(LazmkCase.CONFIG_CREATE), LazmkCase.Event(LazmkCase.POST_CREATE)]
+            event_giver = LazmkCase.EventGiver()
+        case "Zircon":
+            events = [ZinmkCase.Event(ZinmkCase.MESH_CREATE), ZinmkCase.Event(ZinmkCase.CONFIG_CREATE), ZinmkCase.Event(ZinmkCase.POST_CREATE)]
+            event_giver = LazmkCase.EventGiver()
+
     for event in events:
         event_giver.add_event(event)
 

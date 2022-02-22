@@ -1,0 +1,12 @@
+case_name:
+  soft: "soft_name (example: lazurit)"
+  tag_case:
+  - 1_key_words_for_case
+  - 2_key_words_for_case
+  tasks:
+    task1:
+      extends: CASE_NAME_task:task
+    task2:
+      extends: CASE_NAME_task:task
+    task3:
+      extends: CASE_NAME_task:task

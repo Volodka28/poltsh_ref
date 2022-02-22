@@ -1,0 +1,34 @@
+post:
+  any.mcr:
+    files: ALL
+    iters: LAST
+    key:
+    - any_keys_from_config_lazurit
+  any.py: null
+  convert:
+  - list_of_.dat_file_convert_.xlsx
+  picture:
+    any_slice_name:
+      axis_x: var_name
+      axis_y: var_name
+      lim_axes:
+        X_max: 1
+        x_min: 0
+        y_max: 1
+        y_min: -1
+      normal:
+      - 0
+      - 1
+      - 0
+      origin:
+      - 0
+      - 0
+      - 0
+      value:
+        var_name_contour:
+        - min_value_float_or_int
+        - max_value_float_or_int
+        - step_color_scale_float_or_int
+      zones: ''
+    equations:
+    - list equations for tecplot
